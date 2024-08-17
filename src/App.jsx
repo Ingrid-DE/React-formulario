@@ -1,25 +1,24 @@
-import './App.css';
-
-import { useState } from "react";
-import ReactDOM from 'react-dom/client'; 
+import { useState } from "react"; 
 function App() {
-
-    function MyForm() {
-        const [inputs, setInputs] = useState({});
-        
-        const handleChange = (event) => {
-            const name = event.target.name;
-            const value = event.target.value;
-            setInputs(values => ({...values, [name]: value}))
-        }
-        
-        const handleSubmit = (event) => {
-            event.preventDefault();
-            alert(`Tu pedido realizado fue de: ${inputs}`);
-        }
-        
-        return (
-            <form onSubmit={handleSubmit}>
+  
+  const [inputs, setInputs] = useState({});
+  
+  const handleChange = (event) => {
+    const name = event.target.name;
+    const value = event.target.value;
+    setInputs(values => ({...values, [name]: value}))
+  }
+  
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    alert( `Tu pedido realizado fue de: ${JSON.stringify(inputs)}`);
+    console.log(inputs);
+  } 
+  
+  return (
+    <div className="container mt-1"> 
+    <h3> Floreria Roja</h3>
+    <form onSubmit={handleSubmit}>
             <label>Cliente:
             <input 
               type="text" 
@@ -42,7 +41,7 @@ function App() {
                 name="precio" 
                 value={inputs.precio || ""} 
                 onChange={handleChange}
-            />
+                />
             </label>
             <label>Direccion de envio:
               <input 
@@ -50,15 +49,13 @@ function App() {
                 name="direccion" 
                 value={inputs.direccion || ""} 
                 onChange={handleChange}
-            />
+                />
             </label>
         
             <input type="submit" />
           </form>
-        )
-    }
-    
-    const root = ReactDOM.createRoot(document.getElementById('root'));
-    root.render(<MyForm />);
-}
-export default App;
+  </div>
+        );
+      }
+      
+      export default App;
